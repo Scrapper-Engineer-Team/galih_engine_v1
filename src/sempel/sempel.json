@@ -1,0 +1,23 @@
+{
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            111.6859088,
+            -2.8614133
+        ]
+    },
+    "properties": {
+        "kegiatan": "Lapor Kejadian",
+        "tgl": "2023-09-11 10:16:25",
+        "pcode": 6201060004,
+        "organisasi": "BPBD",
+        "lokasi": "DESA KUBU",
+        "user_pemantau": "Djalalludin 82",
+        "deskripsi": "pemadaman kebakaran hutan dan lahan",
+        "foto": [
+            "https://inarisk2.bnpb.go.id/api/upload/foto_posgagah/1694402057044_scaled_c764b627-2dd7-41e9-9983-9ba36563b3db2089859131089891568.jpg",
+            "https://inarisk2.bnpb.go.id/api/upload/foto_posgagah/1694402079877_scaled_b4adbb01-f7b0-40ec-b69a-2bdde981bf794237556970814985292.jpg"
+        ]
+    }
+}

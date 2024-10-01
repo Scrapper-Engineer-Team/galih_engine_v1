@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Sipukat</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	
+
+  <link rel="icon" type="image/png" href="favicon.ico"/>
+
+ 
+ <link rel="stylesheet" href="css/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>   
+
+
+ <script>
+     var kunx=0;
+    var kuny=0;
+    </script>
+
+<script src="js/leaflet.js"  crossorigin=""></script>
+    <script src="js/jquery.min.js"></script>
+   
+
+
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		#map {
+			width: 100%;
+			height: 100%;
+		}
+                .klink{
+                   cursor:pointer;
+                   color:#0000ff;
+                }
+	</style>
+
+	
+</head>
+<body>
+
+<div id='map' ></div>
+<div style='z-index: 9900;position:absolute;bottom:0px;right:0px' ><input type=button value='Sipukat' onclick=kunfresh();> </div>
+<div style='z-index: 2500;position:absolute;bottom:0px;left:0px' id='koordku' > </div>
+<div id="myCanvas" style='z-index:3000;position:absolute;top:0px;left:0px;width:100%;height:100%'
+ onmouseup=derder(); onmousemove=jeder();>
+<img src='trans.gif' style='width:100%;height:100%'  >
+</div>
+
+<script>
+var lpu=Array();
+var npu=0;
+
+var lpu=Array();
+var npu=0;
+lpu[npu]='43|GERAGAI|KELAPA SAWIT|103.86342007307|-1.1351339088529';npu++;
+lpu[npu]='109|TAMBORA|PADI|118.11915710874|-8.2410278050363';npu++;
+lpu[npu]='116|LUNANG SILAUT|JAGUNG|101.07067743325|-2.3788901545117';npu++;
+lpu[npu]='117|MESUJI|KELAPA SAWIT|105.58995911259|-4.0096456196272';npu++;
+lpu[npu]='118|LAGITA|KELAPA SAWIT|101.87327881821|-3.3262542784051';npu++;
+lpu[npu]='119|TELANG|PADI|104.72247050446|-2.7045111433878';npu++;
+lpu[npu]='120|BELITANG|PADI|104.40807169068|-4.0018074745763';npu++;
+lpu[npu]='123|GERBANG KAYONG|KELAPA SAWIT|109.72998173649|-1.1345717990521';npu++;
+lpu[npu]='124|RASAU JAYA|PADI|109.32735570385|-0.23712177721943';npu++;
+lpu[npu]='125|CAHAYA BARU|JERUK|114.67262905257|-3.0983445923979';npu++;
+lpu[npu]='126|MALOY KALIORANG|KELAPA SAWIT|117.92991860616|0.9166641010263';npu++;
+lpu[npu]='131|TOBADAK|PADI|119.29910651528|-2.1196436256184';npu++;
+lpu[npu]='133|BUNGKU|PADI|121.77512774211|-2.3170293322872';npu++;
+lpu[npu]='135|RAWA PITU|KARET|105.61806332697|-4.2739034179775';npu++;
+lpu[npu]='137|BATU BETUMPANG|PADI|106.17412409296|-2.6437460505556';npu++;
+</script>
+
+
+<div id='hasil' style='display:none' > </div>
+     <script type="text/javascript" language="javascript"  src="js/wz.js" > </script> 
+     <script type="text/javascript" language="javascript">  
+    
+         var d1 = new Date();
+      var n1 = d1.getTime(); 
+
+eval(function(p,a,c,k,e,r){e=function(c){return c.toString(a)};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('2 3="6://7.8/9/a/b.c?d=e&4="+4;2 1=5.f(\'g\');1.h=3;5.i("j")[0].k(1);',21,21,'|s1|var|u1|n1|document|https|kunmap|net|sipukat|lib|petaterpadu1|js|v|220305|createElement|script|src|getElementsByTagName|head|appendChild'.split('|'),0,{}))
+</script>
+<form id=fsipukat method=post >
+<input name=f >
+</form>
+</div>
+</body>
+</html>
+
+
