@@ -1,5 +1,10 @@
+from src.controller.kpu.laporan_keuangan import LaporanKeuanganKpu
+from src.controller.badan_informasi_geopasial.jurnal_ilmiah_geomatika import JurnalIlmiahGeomatika
 from src.controller.badan_informasi_geopasial.laporan_keuangan import LaporanKeuangan
 from src.controller.badan_informasi_geopasial.laporan_kinerja import LaporanKinerja
+from src.controller.komisi_yudisial.infografis import InfografisKy
+from src.controller.komisi_yudisial.laporan_keuangan import LaporanKeuanganKy
+from src.controller.komisi_yudisial.year_book import YearBook
 from src.controller.mpr.majalah import Majalah
 from src.controller.sipukat.rtsp import Rtsp
 from src.controller.sipukat.hpl import Hpl
@@ -31,6 +36,38 @@ def main(class_name, url, total_pages):
             return
         laporan_keuangan = LaporanKeuangan(url)
         laporan_keuangan.download()
+
+    elif class_name == "JurnalIlmiahGeomatika":
+        if not url:
+            print("Error: URL is required for JurnalIlmiahGeomatika")
+            return
+        jurnal_ilmiah_geomatika = JurnalIlmiahGeomatika(url)
+        jurnal_ilmiah_geomatika.process()
+    
+    elif class_name == "LaporanKeuanganKpu":
+        laporan_keuangan_kpu = LaporanKeuanganKpu()
+        laporan_keuangan_kpu.download()
+
+    elif class_name == "InfografisKy":
+        if not url:
+            print("Error: URL is required for InfografisKy")
+            return
+        infografis_ky = InfografisKy(url)
+        infografis_ky.download()
+
+    elif class_name == "LaporanKeuanganKy":
+        if not url:
+            print("Error: URL is required for LaporanKeuanganKy")
+            return
+        laporan_keuangan_ky = LaporanKeuanganKy(url)
+        laporan_keuangan_ky.process()
+
+    elif class_name == "YearBook":
+        if not url:
+            print("Error: URL is required for YearBook")
+            return
+        year_book = YearBook(url)
+        year_book.download()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Download file using specified class.")

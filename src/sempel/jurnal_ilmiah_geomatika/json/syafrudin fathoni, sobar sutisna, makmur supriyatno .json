@@ -1,0 +1,27 @@
+{
+    "link": "https://big.go.id/uploads/content/produk/Geomatika/SertifikatAkreditasiJIG2016-2020.pdf",
+    "tags": [
+        "badan_informasi_geopasial",
+        "jurnal_ilmiah_geomatika"
+    ],
+    "source": "big.go.id",
+    "title": "Syafrudin Fathoni, Sobar Sutisna, Makmur Supriyatno ",
+    "sub_title": null,
+    "range_data": null,
+    "create_date": null,
+    "update_date": null,
+    "desc": null,
+    "category": "Jurnal Ilmiah Geomatika",
+    "sub_category": null,
+    "path_data_raw": [
+        "src/sempel/jurnal_ilmiah_geomatika/pdf/syafrudin fathoni, sobar sutisna, makmur supriyatno .pdf",
+        "src/sempel/jurnal_ilmiah_geomatika/json/syafrudin fathoni, sobar sutisna, makmur supriyatno .json"
+    ],
+    "crawling_time": "2024-10-02 11:20:52",
+    "crawling_time_epoch": 1727842852,
+    "table_name": "judul_tabel",
+    "country_name": "Indonesia",
+    "level": "Nasional",
+    "stage": "Crawling data",
+    "update_schedule": "daily"
+}

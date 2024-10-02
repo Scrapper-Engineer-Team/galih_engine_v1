@@ -6,7 +6,7 @@ class Soup:
         self.url = url
         self.soup = self.load_html()
 
-    def load_html(self):
+    def load_html(self):        
         try:
             res = requests.get(self.url)
             res.raise_for_status()  # Akan menimbulkan HTTPError jika status bukan 200

@@ -1,0 +1,27 @@
+{
+    "link": "https://big.go.id/uploads/content/produk/Geomatika/SertifikatAkreditasiJIG2016-2020.pdf",
+    "tags": [
+        "badan_informasi_geopasial",
+        "jurnal_ilmiah_geomatika"
+    ],
+    "source": "big.go.id",
+    "title": "DISTRIBUSI VS30 SECARA MIKROZONASI BERDASARKAN DATA INVERSI SEISMIK PASIF DI SEPANJANG JALAN PROVINSI ALTERNATIF KABUPATEN BENGKULU TENGAH-KEPAHIANG\r\n\t\t",
+    "sub_title": null,
+    "range_data": null,
+    "create_date": null,
+    "update_date": null,
+    "desc": null,
+    "category": "Jurnal Ilmiah Geomatika",
+    "sub_category": null,
+    "path_data_raw": [
+        "src/sempel/jurnal_ilmiah_geomatika/pdf/distribusi vs30 secara mikrozonasi berdasarkan data inversi seismik pasif di sepanjang jalan provinsi alternatif kabupaten bengkulu tengah-kepahiang.pdf",
+        "src/sempel/jurnal_ilmiah_geomatika/json/distribusi vs30 secara mikrozonasi berdasarkan data inversi seismik pasif di sepanjang jalan provinsi alternatif kabupaten bengkulu tengah-kepahiang.json"
+    ],
+    "crawling_time": "2024-10-02 11:20:51",
+    "crawling_time_epoch": 1727842851,
+    "table_name": "judul_tabel",
+    "country_name": "Indonesia",
+    "level": "Nasional",
+    "stage": "Crawling data",
+    "update_schedule": "daily"
+}

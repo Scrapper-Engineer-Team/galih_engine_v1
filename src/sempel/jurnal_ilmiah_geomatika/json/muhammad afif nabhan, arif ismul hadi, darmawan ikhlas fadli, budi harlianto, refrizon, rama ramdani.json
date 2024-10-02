@@ -1,0 +1,27 @@
+{
+    "link": "https://big.go.id/uploads/content/produk/Geomatika/SertifikatAkreditasiJIG2016-2020.pdf",
+    "tags": [
+        "badan_informasi_geopasial",
+        "jurnal_ilmiah_geomatika"
+    ],
+    "source": "big.go.id",
+    "title": "Muhammad Afif Nabhan, Arif Ismul Hadi, Darmawan Ikhlas Fadli, Budi Harlianto, Refrizon, Rama Ramdani",
+    "sub_title": null,
+    "range_data": null,
+    "create_date": null,
+    "update_date": null,
+    "desc": null,
+    "category": "Jurnal Ilmiah Geomatika",
+    "sub_category": null,
+    "path_data_raw": [
+        "src/sempel/jurnal_ilmiah_geomatika/pdf/muhammad afif nabhan, arif ismul hadi, darmawan ikhlas fadli, budi harlianto, refrizon, rama ramdani.pdf",
+        "src/sempel/jurnal_ilmiah_geomatika/json/muhammad afif nabhan, arif ismul hadi, darmawan ikhlas fadli, budi harlianto, refrizon, rama ramdani.json"
+    ],
+    "crawling_time": "2024-10-02 11:20:52",
+    "crawling_time_epoch": 1727842852,
+    "table_name": "judul_tabel",
+    "country_name": "Indonesia",
+    "level": "Nasional",
+    "stage": "Crawling data",
+    "update_schedule": "daily"
+}
