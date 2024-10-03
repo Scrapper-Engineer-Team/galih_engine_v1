@@ -5,8 +5,8 @@ from src.controller.badan_informasi_geopasial.laporan_kinerja import LaporanKine
 from src.controller.komisi_yudisial.infografis import InfografisKy
 from src.controller.komisi_yudisial.laporan_keuangan import LaporanKeuanganKy
 from src.controller.komisi_yudisial.year_book import YearBook
+from src.controller.global_power_city_index.globalpowercityidex import GlobalPowerCityIndex
 from src.controller.mpr.majalah import Majalah
-from src.controller.sipukat.rtsp import Rtsp
 from src.controller.sipukat.hpl import Hpl
 import argparse
 
@@ -68,6 +68,10 @@ def main(class_name, url, total_pages):
             return
         year_book = YearBook(url)
         year_book.download()
+
+    elif class_name == "GlobalPowerCityIndex":
+        global_power_city_index = GlobalPowerCityIndex(url)
+        global_power_city_index.download()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Download file using specified class.")

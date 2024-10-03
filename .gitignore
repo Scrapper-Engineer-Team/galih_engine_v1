@@ -1,3 +1,12 @@
-/env
+# Ignore virtual environment
+env/
+venv/
+
+# Ignore Python cache directories
+__pycache__/
+*.py[cod]
+
 *.pdf
-*__pycache__
+*.json
+*.html
+*.json
