@@ -10,9 +10,10 @@ from src.controller.global_power_city_index.globalpowercityidex import GlobalPow
 from src.controller.mpr.majalah import Majalah
 from src.controller.tanah_kita.kelola_wilayah import KelolaWilayah
 from src.controller.sipukat.hpl import Hpl
+from src.controller.tanah_kita.pusher import PusherTakit
 import argparse
 
-def main(class_name, url, total_pages):
+def main(class_name, url, total_pages, tube):
     logger.success(f"Start process {class_name}...")
     if class_name == "Majalah":
         downloader = Majalah(url, total_pages)
@@ -80,11 +81,19 @@ def main(class_name, url, total_pages):
         kelola_wilayah = KelolaWilayah()
         kelola_wilayah.process()
 
+    elif class_name == "PusherTakit":
+        if not tube:
+            print("Error: TUBE is required for PusherTakit")
+            return
+        pusher = PusherTakit()
+        pusher.process(tube)
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Download file using specified class.")
     parser.add_argument("-n", "--name", type=str, required=True, help="Nama class yang ingin digunakan.")
     parser.add_argument("-u", "--url", type=str, required=False, help="Base URL untuk publikasi.")
     parser.add_argument("-p", "--page", type=int, required=False, help="Jumlah halaman yang ingin didownload.")
+    parser.add_argument("-t", "--tube", type=str, required=False, help="Nama Tube yang diinginkan.")
 
     args = parser.parse_args()
-    main(args.name, args.url, args.page)
+    main(args.name, args.url, args.page, args.tube)

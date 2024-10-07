@@ -3,6 +3,7 @@ import s3fs
 import configparser
 import os
 from loguru import logger
+import greenstalk
 
 class StorageManager:
     def __init__(self, key=None, secret=None, ip=None, port=None, config_path=None):
@@ -16,6 +17,8 @@ class StorageManager:
         self.secret = secret or config.get('s3', 'secret')
         self.ip = ip or config.get('s3', 'ip')
         self.port = port or config.get('s3', 'port')
+        self.beanstalk_ip = config.get('beanstalk', 'ip')
+        self.beanstalk_port = config.getint('beanstalk', 'port')
 
         self.s3 = s3fs.S3FileSystem(
             key=self.key,
@@ -54,3 +57,12 @@ class StorageManager:
             with open(path_file, 'w') as f:
                 f.write(json.dumps(data, indent=4, ensure_ascii=False))
             logger.success(f'Saved JSON to local :{path_file}')
+
+    def send_beanstalk(self, data, tube):
+        greenstalk_client = greenstalk.Client((self.beanstalk_ip, self.beanstalk_port), use=tube)
+        greenstalk_client.put(json.dumps(data))
+        logger.success(f'Sent data to beanstalk : {tube}')
+
+    def get_beanstalk(self, tube):
+        greenstalk_client = greenstalk.Client((self.beanstalk_ip, self.beanstalk_port), watch=tube)
+        return greenstalk_client
