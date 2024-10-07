@@ -31,9 +31,9 @@ class GlobalPowerCityIndex:
                     "gpci"
                 ],
                 "source": "mori-m-foundation.or.jp",
-                "title": data['City Name'],
+                "title": "Global Power City Index",
                 "sub_title": None,
-                "range_data": None,
+                "range_data": "2023",
                 "create_date": None,
                 "update_date": None,
                 "desc": None,
@@ -46,10 +46,10 @@ class GlobalPowerCityIndex:
                 "crawling_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 "crawling_time_epoch": int(time.time()),
                 "table_name": "judul_tabel",
-                "country_name": "Indonesia",
-                "level": "Nasional",
+                "country_name": "Global",
+                "level": "Internasional",
                 "stage": "Crawling data",
                 "update_schedule": "yearly"
             }   
-            StorageManager().save_json(file_path, json.dumps(metadata))
-            logger.success(json.dumps(metadata))
+            StorageManager().save_json(file_path, metadata)
+            logger.success(metadata)

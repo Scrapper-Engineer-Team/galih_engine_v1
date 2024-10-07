@@ -1,95 +1,750 @@
-<!DOCTYPE html>
-<html>
-<head>
-	
-	<title>Sipukat</title>
+<bound method Tag.prettify of <!DOCTYPE html>
 
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	
-
-  <link rel="icon" type="image/png" href="favicon.ico"/>
-
- 
- <link rel="stylesheet" href="css/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>   
-
-
- <script>
-     var kunx=0;
-    var kuny=0;
+<html class="js csstransforms csstransforms3d csstransitions" lang="en"><head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="description"/>
+<meta content="" name="author"/>
+<title>TanahKita</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+<base href="/"/>
+<link href="assets/themes/flat/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+<link href="assets/fa/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+<link href="assets/themes/flat/dist/css/style.css" rel="stylesheet"/>
+<link href="assets/themes/flat/dist/css/responsive.css" rel="stylesheet"/>
+<link href="assets/themes/flat/plugins/iCheck/all.css" rel="stylesheet"/>
+<link href="assets/themes/flat/plugins/jqvm/jqvmap.min.css" rel="stylesheet"/>
+<link href="assets/themes/flat/plugins/datepicker/datepicker3.css" rel="stylesheet"/>
+<link href="assets/themes/flat/plugins/daterangepicker/daterangepicker-2.1.24/daterangepicker.css" rel="stylesheet"/>
+<script src="assets/themes/flat/plugins/jQuery/jQuery-2.1.4.min.js" type="0a0b289aed42edbc35c9ba6c-text/javascript"></script>
+<script src="assets/js/jquery-ui-1.10.3.js" type="0a0b289aed42edbc35c9ba6c-text/javascript"></script>
+<script type="0a0b289aed42edbc35c9ba6c-text/javascript">
+      $.widget.bridge('uibutton', $.ui.button);
     </script>
-
-<script src="js/leaflet.js"  crossorigin=""></script>
-    <script src="js/jquery.min.js"></script>
-   
-
-
-	<style>
-		html, body {
-			height: 100%;
-			margin: 0;
+<script src="assets/themes/flat/bootstrap/js/bootstrap.js" type="0a0b289aed42edbc35c9ba6c-text/javascript"></script>
+<link href="assets/js/additional_js/fancybox/source/jquery.fancybox.css" media="screen" rel="stylesheet">
+<script src="assets/js/additional_js/fancybox/source/jquery.fancybox.js" type="0a0b289aed42edbc35c9ba6c-text/javascript"></script>
+<script src="assets/js/additional_js/fancybox/source/jquery.fancybox.pack.js" type="0a0b289aed42edbc35c9ba6c-text/javascript"></script>
+<style>
+		body {
+			padding-top:110px!important;
+			background-color:#f4f4f4;
 		}
-		#map {
-			width: 100%;
-			height: 100%;
+		
+		.sub-head{
+			position:fixed;
+			top:55px;
+			z-index:999;
+			width:100%;
+			border-width:0
 		}
-                .klink{
-                   cursor:pointer;
-                   color:#0000ff;
-                }
+		.shadow {
+			-webkit-box-shadow: 0px 3px 6px 3px rgba(0,0,0,0.1);
+			-moz-box-shadow: 0px 3px 6px 3px rgba(0,0,0,0.1);
+			box-shadow: 0px 3px 6px 3px rgba(0,0,0,0.1);
+		}
+		.right-side .fa {
+				margin-top: 0px;
+				margin-right: 15px;
+				margin-bottom:10px;
+				width: 45px;
+				height: 45px;
+				line-height: 45px;
+				text-align: center;
+				font-size: 24px;
+				color: #fff;
+				float:left;
+				border-radius:50%;
+				background:#ccc;
+				clear:both
+		}
+		.right-side small{
+				display:block;
+				font-size:small;
+				color:#999;
+				line-height:18px;
+		}
+		.bg-aqua {
+			background:#6CF!important;
+		}
+		.bg-orange {
+			background: #F93!important;
+		}
+		.bg-red {
+			background: #F66!important;
+		}
+		.bg-green {
+			background: #6C9!important;
+		}
+		.pagination > li > a, .pagination > li > span {
+			padding-left: 13px;
+		}
+		.main-menu .navbar-nav > li.active > a::before {
+			position: absolute;
+			top: 50px;
+			left: 50%;
+			margin-left:-8px;
+			border: solid transparent;
+			border-top-color: #d0d0d0;
+			content: ' ';
+			height: 0;
+			width: 0;
+			pointer-events: none;
+			border-width:8px;
+			z-index:100
+		}
+		.main-menu .navbar-nav > li.active > a::after {
+			position: absolute;
+			top: 49px;
+			left: 50%;
+			margin-left:-8px;
+			border: solid transparent;
+			border-top-color: #ffffff;
+			content: ' ';
+			height: 0;
+			width: 0;
+			pointer-events: none;
+			border-width:8px;
+			z-index:100
+		}
+		</style>
+</link></head>
+<body style="padding-top:60px">
+<div class="wrapper">
+<style>
+		.brand-custom a{
+			float: left;
+			height: 30px;
+			padding: 0px 10px 0px;
+			font-size: 18px;
+			line-height: 40px;
+		}
+		.brand-custom h3,.brand-custom h4{
+			margin-top:0px;
+			margin-bottom:0px;
+		}
+		.pagination > li > a, .pagination > li > span {
+			padding-left: 0;
+		}
+		.containerx {
+			padding-top: 0px;
+			padding-bottom: 4px;
+			padding-right: 15px;
+			padding-left: 15px;
+			}
 	</style>
-
-	
-</head>
-<body>
-
-<div id='map' ></div>
-<div style='z-index: 9900;position:absolute;bottom:0px;right:0px' ><input type=button value='Sipukat' onclick=kunfresh();> </div>
-<div style='z-index: 2500;position:absolute;bottom:0px;left:0px' id='koordku' > </div>
-<div id="myCanvas" style='z-index:3000;position:absolute;top:0px;left:0px;width:100%;height:100%'
- onmouseup=derder(); onmousemove=jeder();>
-<img src='trans.gif' style='width:100%;height:100%'  >
+<nav class="main-menu navbar flat navbar-fixed-top" id="nav" style="border-top:3px solid #861e19; background:#fafafa">
+<div class="container">
+<div class="navbar-header">
+<a href=""><img class="pull-left" src="assets/images/tk.png" style="margin:5px 15px -30px 15px"/></a>
+<button class="btn btn-navbar navbar-toggle flat animation" data-target=".navbar-cat-collapse" data-toggle="collapse" type="button">
+<span class="sr-only">Toggle Navigation</span>
+<i class="fa fa-bars"></i>
+</button>
 </div>
-
-<script>
-var lpu=Array();
-var npu=0;
-
-var lpu=Array();
-var npu=0;
-lpu[npu]='43|GERAGAI|KELAPA SAWIT|103.86342007307|-1.1351339088529';npu++;
-lpu[npu]='109|TAMBORA|PADI|118.11915710874|-8.2410278050363';npu++;
-lpu[npu]='116|LUNANG SILAUT|JAGUNG|101.07067743325|-2.3788901545117';npu++;
-lpu[npu]='117|MESUJI|KELAPA SAWIT|105.58995911259|-4.0096456196272';npu++;
-lpu[npu]='118|LAGITA|KELAPA SAWIT|101.87327881821|-3.3262542784051';npu++;
-lpu[npu]='119|TELANG|PADI|104.72247050446|-2.7045111433878';npu++;
-lpu[npu]='120|BELITANG|PADI|104.40807169068|-4.0018074745763';npu++;
-lpu[npu]='123|GERBANG KAYONG|KELAPA SAWIT|109.72998173649|-1.1345717990521';npu++;
-lpu[npu]='124|RASAU JAYA|PADI|109.32735570385|-0.23712177721943';npu++;
-lpu[npu]='125|CAHAYA BARU|JERUK|114.67262905257|-3.0983445923979';npu++;
-lpu[npu]='126|MALOY KALIORANG|KELAPA SAWIT|117.92991860616|0.9166641010263';npu++;
-lpu[npu]='131|TOBADAK|PADI|119.29910651528|-2.1196436256184';npu++;
-lpu[npu]='133|BUNGKU|PADI|121.77512774211|-2.3170293322872';npu++;
-lpu[npu]='135|RAWA PITU|KARET|105.61806332697|-4.2739034179775';npu++;
-lpu[npu]='137|BATU BETUMPANG|PADI|106.17412409296|-2.6437460505556';npu++;
-</script>
-
-
-<div id='hasil' style='display:none' > </div>
-     <script type="text/javascript" language="javascript"  src="js/wz.js" > </script> 
-     <script type="text/javascript" language="javascript">  
-    
-         var d1 = new Date();
-      var n1 = d1.getTime(); 
-
-eval(function(p,a,c,k,e,r){e=function(c){return c.toString(a)};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('2 3="6://7.8/9/a/b.c?d=e&4="+4;2 1=5.f(\'g\');1.h=3;5.i("j")[0].k(1);',21,21,'|s1|var|u1|n1|document|https|kunmap|net|sipukat|lib|petaterpadu1|js|v|220305|createElement|script|src|getElementsByTagName|head|appendChild'.split('|'),0,{}))
-</script>
-<form id=fsipukat method=post >
-<input name=f >
-</form>
+<div class="collapse navbar-collapse navbar-cat-collapse animation">
+<ul class="pull-left nav navbar-nav text-bold">
+<li class=""><a href="">BERANDA</a></li>
+<li class=""><a href="home">PETA</a></li>
+<li class=""><a href="news">BERITA</a></li>
+<li class=""><a href="profiles">TENTANG TANAH KITA</a></li>
+<li class="dropdown">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#">PUSTAKA  <i class="fa fa-angle-down"></i></a>
+<ul class="dropdown-menu" role="menu">
+<li><a href="pustaka/pp">Peraturan Kebijakan</a></li>
+<li><a href="pustaka/hp">Hasil Penelitian &amp; Analisis</a></li>
+</ul>
+</li>
+<li class=""><a href="layanan">PELAPORAN</a></li>
+<li class=""><a href="buku_tamu">KONTAK</a></li>
+</ul>
 </div>
-</body>
-</html>
+</div>
+</nav>
+<script type="0a0b289aed42edbc35c9ba6c-text/javascript">
+	$(document).ready(function(){
+		$(".togleup").click(function(){
+			$(".xhead").slideToggle('slow');
+		});
+	});
+</script>
+<div class="content-wrapper" style="min-height:86.25vh;">
+<script src="assets/js/maskF/my.js" type="0a0b289aed42edbc35c9ba6c-text/javascript"></script>
+<link href="assets/js/leaflet/leaflet.css" rel="stylesheet" type="text/css"/>
+<link href="assets/js/leaflet/leaflet-awesome-markers/leaflet.awesome-markers.css" rel="stylesheet" type="text/css"/>
+<link href="assets/js/leaflet/leaflet-l-geosearch/css/l.geosearch.css" rel="stylesheet">
+<script src="assets/js/leaflet/leaflet.js" type="0a0b289aed42edbc35c9ba6c-text/javascript"></script>
+<script src="assets/js/leaflet/leaflet-awesome-markers/leaflet.awesome-markers.min.js" type="0a0b289aed42edbc35c9ba6c-text/javascript"></script>
+<script src="assets/js/leaflet/leaflet-l-geosearch/js/l.control.geosearch.js" type="0a0b289aed42edbc35c9ba6c-text/javascript"></script>
+<script src="assets/js/leaflet/leaflet-l-geosearch/js/l.geosearch.provider.google.js" type="0a0b289aed42edbc35c9ba6c-text/javascript"></script>
+<link href="assets/css/rrss.css" rel="stylesheet"/>
+<script src="assets/js/jquery-rrss.js" type="0a0b289aed42edbc35c9ba6c-text/javascript"></script>
+<style>
+.leaflet-top,
+.leaflet-bottom {
+	z-index: 499;
+}
+h4.heading{
+	font-size:16px;
+	font-weight:bold;
+	background-color:#E5E5E5;
+	padding:10px;
+}
+p{
+	font-size:14px;
+}
+.keterlibatan{
+	font-size:14px;
+}
+.mailbox-attachment-info{
+	font-size:13px;
+}
+.mailbox-attachments{
+	list-style:none;
+}
+.table_title{
+	font-weight:bold;
+}
+#narasi{
+	text-indent:50px;
+}
+</style>
+<style>
+.green{color:#00A65A}
+.yellow{color:#F39C12}
+.mailbox-messages > .table {
+    margin: 0;
+}
+.mailbox-controls {
+    padding: 5px;
+}
+.mailbox-controls.with-border {
+    border-bottom: 1px solid #f4f4f4;
+}
+.mailbox-read-info {
+    border-bottom: 1px solid #f4f4f4;
+    padding: 10px;
+}
+.mailbox-read-info h3 {
+    font-size: 20px;
+    margin: 0;
+}
+.mailbox-read-info h5 {
+    margin: 0;
+    padding: 5px 0 0;
+}
+.mailbox-read-time {
+    color: #999;
+    font-size: 13px;
+}
+.mailbox-read-message {
+    padding: 10px;
+}
+.mailbox-attachments li {
+    border: 1px solid #eee;
+    float: left;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    width: 200px;
+}
+.mailbox-attachment-name {
+    color: #666;
+    font-weight: bold;
+}
+.mailbox-attachment-icon, .mailbox-attachment-info, .mailbox-attachment-size {
+    display: block;
+}
+.mailbox-attachment-info {
+    background: #f4f4f4 none repeat scroll 0 0;
+    padding: 10px;
+}
+.mailbox-attachment-size {
+    color: #999;
+    font-size: 12px;
+}
+.mailbox-attachment-icon {
+    color: #666;
+    font-size: 65px;
+    padding: 20px 10px;
+    text-align: center;
+}
+.mailbox-attachment-icon.has-img {
+    padding: 0;
+}
+.mailbox-attachment-icon.has-img > img {
+    height: auto;
+    max-width: 100%;
+}
+</style>
+<div class="well well-sm sub-head" style="margin-top:-1px;margin-bottom:10px;">
+<div class="container" style="padding:0 30px;">
+<div class="row">
+<div class="col-sm-12">
+<div class="row">
+<div class="col-md-6">
+<h6 class="box-title" style="ext-transform:uppercase"><strong>DATA DETIL</strong></h6>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="main-container container">
+<div class="row">
+<div class="col-sm-12 col-xs-12">
+<div class="content">
+<div class="row">
+<div class="col-sm-12 col-xs-12">
+<div class="row">
+<div class="col-sm-6">
+<div class="text-uppercase block-2">
+<h6 class="sub-heading-1 text-center-xs text-spl-color" style=" border:none !important; margin-top:10px"><strong>PS Sumber Mulyo</strong></h6>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="pull-right">
+<style>
+.rrssb-icon i {
+	font-size:18px; color:#fff; line-height:30px
+}
+</style>
+<div class="share-container clearfix" style="background:transparent; padding:3px 0 0; ">
+<span class="label" style="color:#999">SHARE</span>
+<ul class="rrssb-buttons clearfix" style="width:200px; height:41px;">
+<li class="rrssb-facebook">
+<a class="popup" href="https://www.facebook.com/sharer/sharer.php?u=http://tanahkita.id/data/wilayah_kelola/detil/LUZLaTE4dl82WjQ">
+<span class="rrssb-icon">
+<i class="fa fa-facebook"></i>
+</span>
+<span class="rrssb-text">facebook</span>
+</a>
+</li>
+<li class="rrssb-twitter">
+<a class="popup" href="https://twitter.com/home?status=Tanah%20Kita%20-%20Wilayah%20Kelola%20%3A%20PS%20Sumber%20Mulyo%20@brwa%20http://tanahkita.id/data/wilayah_kelola/detil/LUZLaTE4dl82WjQ">
+<span class="rrssb-icon">
+<i class="fa fa-twitter"></i>
+</span>
+<span class="rrssb-text">twitter</span>
+</a>
+</li>
+<li class="rrssb-googleplus">
+<a class="popup" href="https://plus.google.com/share?url=Tanah%20Kita%20-%20Wilayah%20Kelola%20%3A%20PS%20Sumber%20Mulyo%20@brwa%20http://tanahkita.id/data/wilayah_kelola/detil/LUZLaTE4dl82WjQ">
+<span class="rrssb-icon">
+<i class="fa fa-google-plus"></i>
+</span>
+<span class="rrssb-text">google+</span>
+</a>
+</li>
+<li class="rrssb-email">
+<a href="/cdn-cgi/l/email-protection#fac5898f98909f998ec7ae9b949b92dfc8cab1938e9bdfc8cad7dfc8caad93969b839b92dfc8cab19f9695969bdfc8cadfc9bbdfc8caaaa9dfc8caa98f97989f88dfc8cab78f968395dfc8caba98888d9bdfc8ca9b949edfc8cadc9b978ac198959e83c7928e8e8adfc9bbdfc8bcdfc8bc8e9b949b9291938e9bd4939edfc8bc9e9b8e9bdfc8bc8d93969b839b92a5919f9695969bdfc8bc9e9f8e9396dfc8bcb6afa0b69baebfce9e96c2c8ad90ab">
+<span class="rrssb-icon">
+<i class="fa fa-at"></i>
+</span>
+<span class="rrssb-text">email</span>
+</a>
+</li>
+</ul>
+</div> </div>
+</div>
+</div>
+<div class="media">
+<div class="row">
+<div class="col-sm-12">
+<div class="row">
+<div class="col-md-6">
+<div class="row">
+<div class="col-md-12">
+<div id="map" style="height:300px;"></div>
+<input class="form-control hidden required" data-x="114.089124" id="x" name="longitude" type="text" value="114.089124"/> <input class="form-control hidden required" data-y="-8.53829" id="y" name="latitude" type="text" value="-8.53829"/> <p style="opacity: 0.6;color:#fff;background-color:transparent;margin-top:-25px;font-size:13px;padding:5px 10px;">
+Validasi Peta: <span class="label label-info">Valid</span>
+</p>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<table class="table table-condensed" style="font-size:13px;">
+<tr>
+<td class="table_title" width="200">Tanggal Input</td>
+<td>:</td>
+<td> 20-06-2024</td>
+</tr>
+<tr>
+<td class="table_title" width="200">Nama Wilayah Kelola</td>
+<td>:</td>
+<td> PS Sumber Mulyo</td>
+</tr>
+<tr>
+<td class="table_title">Jenis Wilayah Kelola</td>
+<td>:</td>
+<td>
+Tanah Objek Reforma Agraria </td>
+</tr>
+<tr>
+<td class="table_title">Tahapan</td>
+<td>:</td>
+<td><small>Usulan</small><br/>
+Usulan </td>
+</tr>
+<tr>
+<td class="table_title">Luas </td>
+<td>:</td>
+<td> 577,421 Ha</td>
+</tr>
+<tr>
+<td class="table_title">Provinsi</td>
+<td>:</td>
+<td> Jawa Timur </td>
+</tr>
+<tr>
+<td class="table_title">Kabupaten</td>
+<td>:</td>
+<td> Kab. Mojokerto </td>
+</tr>
+<tr>
+<td class="table_title">Kecamatan</td>
+<td>:</td>
+<td>  </td>
+</tr>
+<tr>
+<td class="table_title">Desa</td>
+<td>:</td>
+<td> Sumber Mulyo </td>
+</tr>
+</table>
+</div>
+</div>
+<div class="row">
+<div class="col-md-12">
+<h4 class="heading">SURAT KEPUTUSAN</h4>
+<div class="row keterlibatan">
+<div class="col-md-12">
+<table class="table">
+<tr>
+<th>No. Surat Keputusan</th>
+<th>Tentang</th>
+<th>Lampiran</th>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<h4 class="heading">KONTEN</h4>
+<div class="row">
+<div class="col-md-12">
+<table class="table">
+<tr>
+<th>Deskripsi</th>
+</tr>
+<tr>
+<td><p align="justify" id="narasi"></p></td>
+</tr>
+</table>
+<table class="table">
+<tr>
+<th>Sumber Data</th>
+</tr>
+<tr>
+<td>SLPP Jawa Timur</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<h4 class="heading">Data Mitra/Pendamping</h4>
+<div class="row">
+<div class="col-md-12">
+<table class="table">
+<tr>
+<th>Nama Mitra</th>
+<td></td>
+</tr>
+<tr>
+<th>Email</th>
+<td></td>
+</tr>
+<tr>
+<th>No. Telepon</th>
+<td></td>
+</tr>
+<tr>
+<th>Alamat</th>
+<td></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="0a0b289aed42edbc35c9ba6c-text/javascript">
+	var cloudmade =L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				attribution: '© <a href="//openstreetmap.org">OpenStreetMap</a> contributors',
+				maxZoom: 18
+			});
+			
+		var baseLayers = {
+		  "OSM CloudMade": cloudmade,	
+		  //"Street Map": mapquestOSM,
+		  //"Aerial Imagery": mapquestOAM,
+		  //"Imagery with Streets": mapquestHYB
+		};	
 
+		var map=null;
+		var jsonlayer=null;
+		var markers=[];
+		var markerFlag=1;
+		var info=null;
+		var legend=null;
+		var mark_location_new=null;
+		var mark_location=null;
+		var lat=null;
+		var lon=null;
+		
+		var blueMarker = L.AwesomeMarkers.icon({
+			prefix:'fa',
+			icon: 'home',
+			markerColor: 'blue'
+		});
+		var orangeMarker = L.AwesomeMarkers.icon({
+			prefix:'fa',
+			icon: 'home',
+			markerColor: 'orange'
+		});
+		
+		function loadMap(){
+			if(map==null){
+				/*
+				map = L.map('mapx').setView([1, 114],4);
+				 cloudmade = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
+					attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
+					key: 'BC9A493B41014CAABB98F0471D759707',
+					styleId: 22677
+				}).addTo(map);
+				*/
+				/*
+				console.log(cloudmade);
+				var map = L.map('mapx', {
+					layers: [cloudmade] // only add one!
+				}).setView([1, 114],10);
+				*/
+				
+				map = L.map('mapx').setView([1, 114],4);
+				map.addLayer(cloudmade);
+				
+				/*
+				L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+					attribution: '© <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+					maxZoom: 18
+				}).addTo(map);
+				*/
+				//cloudmade.addTo(map);
+				
+				L.control.layers(baseLayers).addTo(map);
+				
+				/* add search control */
+				/*
+				new L.Control.GeoSearch({
+						provider: new L.GeoSearch.Provider.Google(),
+						//provider: new L.GeoSearch.Provider.OpenStreetMap(),
+						showMarker: false
+				}).addTo(map);
+				*/
+				new L.Control.GeoSearch({
+						provider: new L.GeoSearch.Provider.Google({
+							bounds: { north: 6, east: 145, south: -11, west: 92 }	
+						}),
+						showMarker: false
+				}).addTo(map);
+				
+			}	
+			
+			    var loc=map.getCenter();
+				
+				var validLon=$("#x").val()>95?true:false;
+				var longitude=$("#x").val()||loc.lng;
+				var latitude=$("#y").val()||loc.lat;
+				var zoom=4;
+				if(validLon){
+					zoom=10;
+				}
+				if (!mark_location) {
+					mark_location = L.marker([latitude,longitude],{icon:blueMarker}).bindPopup("Lokasi Konflik").addTo(map);
+					map.setView([latitude, longitude], zoom);
+				}
+			
+		}
+		
+		$(function(){
+			$("#mapx").remove();
+			$("#map").html("<div id='mapx' style='width:100%;height:100%'></div>");
+			lon=$("#x").val();
+			lat=$("#y").val();
+			//alert(lon);
+			//alert(lat);
+			
+			/*
+			$("#map").css("max-height", $(window).height() - $(".navbar-static-top").height() -35);
+			$("#map").css("height", $(window).height() - $(".navbar-static-top").height()-35);
+			
+			$(window).resize(function() {
+				$("#map").css("max-height", $(window).height() - $(".navbar-static-top").height() -35);
+				$("#map").css("height", $(window).height() - $(".navbar-static-top").height() -35);
+			});
+			*/
+			loadMap();	
+			
+			//map.on('click', addMarker);	
+			
+			$("#btn_set_point").click(function(e){
+				e.preventDefault();
+				var latitude=$("#y").val()*1 || map.getCenter().lat;
+				var longitude=$("#x").val()*1 || map.getCenter().lng; 
+				
+				if (!mark_location) {
+					mark_location = L.marker([latitude,longitude]).bindPopup("Lokasi Konflik").addTo(map);
+				}else{
+					mark_location.setOpacity(0.5);
+					if (!mark_location_new) {
+						mark_location_new = L.marker([latitude,longitude],{icon:orangeMarker}).bindPopup("Lokasi Baru").addTo(map);
+					}
+					mark_location_new.setLatLng([latitude,longitude]).update();
+					//
+					var markerArray = [];
+					markerArray.push(mark_location);
+					markerArray.push(mark_location_new);
+					var group = L.featureGroup(markerArray); //add markers array to featureGroup
+        			if(mark_location.getLatLng().toString()!=mark_location_new.getLatLng().toString()){
+						//console.log("test");
+						//console.log(mark_location.getLatLng());
+						//console.log(mark_location_new.getLatLng());
+						map.fitBounds(group.getBounds());  
+					}else{
+						console.log("test2");
+						map.setView([latitude, longitude], 10);
+					}
+				}
+				
+				
+			});
+			
+			/*
+			map.on('click', function(e) {
+    			//alert("test");
+				//alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+				var latitude=e.latlng.lat;
+				var longitude=e.latlng.lng;
+				
+				$("#x").val(e.latlng.lng);
+				$("#y").val(e.latlng.lat);
+				if (!mark_location) {
+					mark_location = L.marker([latitude,longitude]).bindPopup("Lokasi Sekarang").addTo(map);
+				}else{
+					mark_location.setOpacity(0.5);
+					if (!mark_location_new) {
+						mark_location_new = L.marker([latitude,longitude],{icon:orangeMarker}).bindPopup("Lokasi Baru").addTo(map);
+					}
+					mark_location_new.setLatLng([latitude,longitude]).update();
+				}
+			});
+			*/
+		});
+		
+		function search_location(q){
+			var limit=10;
+				$.getJSON("http://nominatim.openstreetmap.org/search?format=json&limit="+limit+"&q="+q+"&countrycodes=id",function(data){
+					latitude=data[0].lat;
+					longitude=data[0].lon;
+					map.setView([latitude, longitude], 6);
+				});	
+		}
+		
+		
+		function addMarker(e){
+			// Add marker to map at click location; add popup window
+			var newMarker = new L.marker(e.latlng).addTo(map);
+		}
+		
+</script>
+<script type="0a0b289aed42edbc35c9ba6c-text/javascript">
+document.getElementById("imgInp1").onchange = function () {
+    var reader = new FileReader();
 
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("attachment1").src = e.target.result;
+    };
+
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+};
+document.getElementById("imgInp2").onchange = function () {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("attachment2").src = e.target.result;
+    };
+
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+};
+document.getElementById("imgInp3").onchange = function () {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("attachment3").src = e.target.result;
+    };
+
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+};
+</script>
+</link></div>
+<div class="modal fade" id="myModal">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
+<h4 class="modal-title">Modal title</h4>
+</div>
+<div class="modal-body">
+<p>Here settings can be configured...</p>
+</div>
+<div class="modal-footer">
+<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+<button class="btn btn-primary" type="button">Save changes</button>
+</div>
+</div>
+</div>
+</div>
+<footer class="copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-12" style="padding-left:35px">
+<small class="text-light small">TanahKita © 2022. All Rights Reserved. Designed By <a href="https://dinamof.co.id/" title="PT. Dinamika Metamorfosa Indonesia">Dinamof</a></small>
+</div>
+</div>
+</div>
+</footer>
+<script data-cf-settings="0a0b289aed42edbc35c9ba6c-|49" defer="" src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"></script></div></body></html>
+>

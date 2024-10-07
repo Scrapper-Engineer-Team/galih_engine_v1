@@ -1,3 +1,4 @@
+from loguru import logger
 from src.controller.kpu.laporan_keuangan import LaporanKeuanganKpu
 from src.controller.badan_informasi_geopasial.jurnal_ilmiah_geomatika import JurnalIlmiahGeomatika
 from src.controller.badan_informasi_geopasial.laporan_keuangan import LaporanKeuangan
@@ -7,10 +8,12 @@ from src.controller.komisi_yudisial.laporan_keuangan import LaporanKeuanganKy
 from src.controller.komisi_yudisial.year_book import YearBook
 from src.controller.global_power_city_index.globalpowercityidex import GlobalPowerCityIndex
 from src.controller.mpr.majalah import Majalah
+from src.controller.tanah_kita.kelola_wilayah import KelolaWilayah
 from src.controller.sipukat.hpl import Hpl
 import argparse
 
 def main(class_name, url, total_pages):
+    logger.success(f"Start process {class_name}...")
     if class_name == "Majalah":
         downloader = Majalah(url, total_pages)
         downloader.download()
@@ -19,9 +22,9 @@ def main(class_name, url, total_pages):
         hpl = Hpl()
         hpl.process()
 
-    elif class_name == "rtsp":
-        rtsp = Rtsp()
-        rtsp.process()
+    # elif class_name == "rtsp":
+    #     rtsp = Rtsp()
+    #     rtsp.process()
 
     elif class_name == "LaporanKinerja":
         if not url:
@@ -70,8 +73,12 @@ def main(class_name, url, total_pages):
         year_book.download()
 
     elif class_name == "GlobalPowerCityIndex":
-        global_power_city_index = GlobalPowerCityIndex(url)
+        global_power_city_index = GlobalPowerCityIndex()
         global_power_city_index.download()
+
+    elif class_name == "KelolaWilayah":
+        kelola_wilayah = KelolaWilayah()
+        kelola_wilayah.process()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Download file using specified class.")
