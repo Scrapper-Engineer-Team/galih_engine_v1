@@ -1,5 +1,6 @@
 import json
 from bs4 import BeautifulSoup
+from loguru import logger
 import requests
 from src.lib.storage_manager import StorageManager
 
@@ -87,7 +88,7 @@ class PusherTakit:
                             }
 
                             url = f'https://tanahkita.id/data/wilayah_kelola/index/{i}'
-                            print(f"Fetching URL: {url} with params: {params}")
+                            logger.info(f"Fetching URL: {url} with params: {params}")
 
                             response = requests.get(
                                 url,
@@ -123,11 +124,11 @@ class PusherTakit:
                                 
                                 # Jika loop pertama (`i == 0`) dan tidak ada data, break loop `i` dan lanjut ke kode tahapan berikutnya
                                 elif i == 0 and not links:
-                                    print(f"No data found for first page of URL: {url}, skipping to next kode_tahapan.")
+                                    logger.error(f"No data found for first page of URL: {url}, skipping to next kode_tahapan.")
                                     break
 
                             else:
-                                print(f"Request failed for URL: {response.url} with status code: {response.status_code}")
+                                logger.error(f"Request failed for URL: {response.url} with status code: {response.status_code}")
 
                         # Jika tidak ada data ditemukan pada loop pertama (`i == 0`), lanjutkan ke tahapan berikutnya
                         if not data_found_in_first_page:
