@@ -17,8 +17,8 @@ class StorageManager:
         self.secret = secret or config.get('s3', 'secret')
         self.ip = ip or config.get('s3', 'ip')
         self.port = port or config.get('s3', 'port')
-        self.beanstalk_ip = config.get('beanstalk', 'ip')
-        self.beanstalk_port = config.get('beanstalk', 'port')
+        self.beanstalk_ip = config.get('beanstalk', 'beanstalk_ip')
+        self.beanstalk_port = config.get('beanstalk', 'beanstalk_port')
 
         self.beanstalk_client = greenstalk.Client((self.beanstalk_ip, int(self.beanstalk_port)))
 
