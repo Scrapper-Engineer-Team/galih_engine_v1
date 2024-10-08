@@ -6,7 +6,7 @@ from loguru import logger
 import greenstalk
 
 class StorageManager:
-    def __init__(self, key=None, secret=None, ip=None, port=None, config_path=None):
+    def __init__(self, key=None, secret=None, ip=None, port=None, config_path=None, beanstalk_ip=None, beanstalk_port=None):
         config = configparser.ConfigParser()
         if config_path:
             config.read(config_path)
@@ -20,7 +20,6 @@ class StorageManager:
         self.beanstalk_ip = config.get('beanstalk', 'ip')
         self.beanstalk_port = config.get('beanstalk', 'port')
 
-        self.fs = s3fs.S3FileSystem(key=self.key, secret=self.secret)
         self.beanstalk_client = greenstalk.Client((self.beanstalk_ip, int(self.beanstalk_port)))
 
         self.s3 = s3fs.S3FileSystem(
