@@ -18,7 +18,10 @@ class StorageManager:
         self.ip = ip or config.get('s3', 'ip')
         self.port = port or config.get('s3', 'port')
         self.beanstalk_ip = config.get('beanstalk', 'ip')
-        self.beanstalk_port = config.getint('beanstalk', 'port')
+        self.beanstalk_port = config.get('beanstalk', 'port')
+
+        self.fs = s3fs.S3FileSystem(key=self.key, secret=self.secret)
+        self.beanstalk_client = greenstalk.Client((self.ip, int(self.port)))
 
         self.s3 = s3fs.S3FileSystem(
             key=self.key,
@@ -59,10 +62,22 @@ class StorageManager:
             logger.success(f'Saved JSON to local :{path_file}')
 
     def send_beanstalk(self, data, tube):
-        greenstalk_client = greenstalk.Client((self.beanstalk_ip, self.beanstalk_port), use=tube)
-        greenstalk_client.put(json.dumps(data))
-        logger.success(f'Sent data to beanstalk : {tube}')
+        try:
+            logger.info(f"Sending data to Beanstalk tube: {tube}")
+            self.beanstalk_client.use(tube)
+            self.beanstalk_client.put(json.dumps(data))
+            logger.info(f"Successfully sent data to Beanstalk tube: {tube}")
+        except Exception as e:
+            logger.error(f"Failed to send data to Beanstalk: {str(e)}")
 
     def get_beanstalk(self, tube):
-        greenstalk_client = greenstalk.Client((self.beanstalk_ip, self.beanstalk_port), watch=tube)
-        return greenstalk_client
+        try:
+        # Membuka koneksi ke Beanstalk menggunakan context manager
+            with greenstalk.Client((self.beanstalk_ip, self.beanstalk_port), watch=tube) as greenstalk_client:
+                return greenstalk_client
+        except greenstalk.ConnectionError as e:
+            print(f"Error connecting to Beanstalk at {self.beanstalk_ip}:{self.beanstalk_port} - {e}")
+            return None
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
+            return None
