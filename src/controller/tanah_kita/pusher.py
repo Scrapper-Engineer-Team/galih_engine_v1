@@ -14,9 +14,6 @@ years = [
 jenis_wikera = [
     "TORA", "PIAPS", "HA", "PPPBM"
 ]
-kode_tahapan = [
-    'T1'
-]
 
 class PusherTakit:
     def __init__(self):
@@ -45,72 +42,70 @@ class PusherTakit:
         for provs in code_provs:
             for year in years:
                 for jewi in jenis_wikera:
-                    for tahap in kode_tahapan:
 
-                        # Variabel untuk mengecek apakah data ditemukan di halaman pertama
-                        data_found_in_first_page = False
+                    # Variabel untuk mengecek apakah data ditemukan di halaman pertama
+                    data_found_in_first_page = False
 
-                        for i in range(0, 201):  # Loop untuk page index
-                            params = {
-                                'tipe': '2',
-                                'tahun': year,
-                                'mmode': '0',
-                                'bulan': '12',
-                                'kd_prop': provs,
-                                'jenis_wikera': jewi,
-                                'kode_tahapan': tahap,
-                            }
+                    for i in range(0, 201,10):  # Loop untuk page index
+                        params = {
+                            'tipe': '2',
+                            'tahun': year,
+                            'mmode': '0',
+                            'bulan': '12',
+                            'kd_prop': provs,
+                            'jenis_wikera': jewi,
+                            'kode_tahapan': 'T1',
+                        }
 
-                            url = f'https://tanahkita.id/data/wilayah_kelola/index/{i}'
-                            logger.info(f"Fetching URL: {url} with params: {params}")
+                        url = f'https://tanahkita.id/data/wilayah_kelola/index/{i}'
+                        logger.info(f"Fetching URL: {url} with params: {params}")
 
-                            try:
-                                response = requests.get(
-                                    url,
-                                    params=params,
-                                    cookies=self.cookies,
-                                    headers=self.headers
-                                )
+                        try:
+                            response = requests.get(
+                                url,
+                                params=params,
+                                cookies=self.cookies,
+                                headers=self.headers
+                            )
 
-                                # Cek jika request berhasil
-                                response.raise_for_status()  # Akan memicu exception jika status bukan 200
+                            # Cek jika request berhasil
+                            response.raise_for_status()  # Akan memicu exception jika status bukan 200
 
-                                soup = BeautifulSoup(response.text, 'html.parser')
-                                links = soup.select('td a')  # Pilih elemen <a> di dalam elemen <td>
+                            soup = BeautifulSoup(response.text, 'html.parser')
+                            links = soup.select('td a')  # Pilih elemen <a> di dalam elemen <td>
 
-                                # Jika ada data ditemukan, ubah variabel menjadi True
-                                if links:
-                                    data_found_in_first_page = True
+                            # Jika ada data ditemukan, ubah variabel menjadi True
+                            if links:
+                                data_found_in_first_page = True
 
-                                    # Loop untuk mengambil semua link yang ditemukan
-                                    for link in links:
-                                        href = link.get('href')
-                                        if href:
-                                            full_link = requests.compat.urljoin(response.url, href)
-                                            
-                                            base_meta = {
-                                                'kd_prop': provs,
-                                                'jenis_wikera': jewi,
-                                                'kode_tahapan': tahap,
-                                                'tahun': year,
-                                                'url': full_link
-                                            }
+                                # Loop untuk mengambil semua link yang ditemukan
+                                for link in links:
+                                    href = link.get('href')
+                                    if href:
+                                        full_link = requests.compat.urljoin(response.url, href)
+                                        
+                                        base_meta = {
+                                            'kd_prop': provs,
+                                            'jenis_wikera': jewi,
+                                            'tahun': year,
+                                            'url': full_link
+                                        }
 
-                                            StorageManager().send_beanstalk(base_meta, tube)
+                                        StorageManager().send_beanstalk(base_meta, tube)
 
-                                # Jika loop pertama (`i == 0`) dan tidak ada data, break loop `i` dan lanjut ke kode tahapan berikutnya
-                                elif i == 0 and not links:
-                                    logger.error(f"No data found for first page of URL: {url}, skipping to next kode_tahapan.")
-                                    break
+                            # Jika loop pertama (`i == 0`) dan tidak ada data, break loop `i` dan lanjut ke kode tahapan berikutnya
+                            elif i == 0 and not links:
+                                logger.error(f"No data found for first page of URL: {url}, skipping to next kode_tahapan.")
+                                break
 
-                            except requests.HTTPError as http_err:
-                                logger.error(f"HTTP error occurred: {http_err} for URL: {url}")
-                            except Exception as err:
-                                logger.error(f"Other error occurred: {err} for URL: {url}")
+                        except requests.HTTPError as http_err:
+                            logger.error(f"HTTP error occurred: {http_err} for URL: {url}")
+                        except Exception as err:
+                            logger.error(f"Other error occurred: {err} for URL: {url}")
 
-                        # Jika tidak ada data ditemukan pada loop pertama (`i == 0`), lanjutkan ke tahapan berikutnya
-                        if not data_found_in_first_page:
-                            continue
+                    # Jika tidak ada data ditemukan pada loop pertama (`i == 0`), lanjutkan ke tahapan berikutnya
+                    if not data_found_in_first_page:
+                        continue
 
     def process(self, tube):
         self.get_link(tube)
