@@ -21,7 +21,7 @@ class StorageManager:
         self.beanstalk_port = config.get('beanstalk', 'port')
 
         self.fs = s3fs.S3FileSystem(key=self.key, secret=self.secret)
-        self.beanstalk_client = greenstalk.Client((self.ip, int(self.port)))
+        self.beanstalk_client = greenstalk.Client((self.beanstalk_ip, int(self.beanstalk_port)))
 
         self.s3 = s3fs.S3FileSystem(
             key=self.key,
