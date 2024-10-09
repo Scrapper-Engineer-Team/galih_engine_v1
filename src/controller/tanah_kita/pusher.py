@@ -2,7 +2,7 @@ import json
 from bs4 import BeautifulSoup
 from loguru import logger
 import requests
-from src.lib.storage_manager import StorageManager
+import greenstalk
 
 
 code_provs = [
@@ -38,7 +38,7 @@ class PusherTakit:
             'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
         }
 
-    def get_link(self, tube):
+    def get_link(self):
         for provs in code_provs:
             for year in years:
                 for jewi in jenis_wikera:
@@ -91,7 +91,8 @@ class PusherTakit:
                                             'url': full_link
                                         }
 
-                                        StorageManager().send_beanstalk(base_meta, tube)
+                                        client = greenstalk.Client(('192.168.99.69', 11300), use='sc-tanah-kita-baselink')
+                                        client.put(json.dumps(base_meta), ttr=3600)
 
                             # Jika loop pertama (`i == 0`) dan tidak ada data, break loop `i` dan lanjut ke kode tahapan berikutnya
                             elif i == 0 and not links:

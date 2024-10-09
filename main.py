@@ -13,7 +13,7 @@ from src.controller.sipukat.hpl import Hpl
 from src.controller.tanah_kita.pusher import PusherTakit
 import argparse
 
-def main(class_name, url, total_pages, tube):
+def main(class_name, url, total_pages):
     logger.success(f"Start process {class_name}...")
     if class_name == "Majalah":
         downloader = Majalah(url, total_pages)
@@ -82,11 +82,8 @@ def main(class_name, url, total_pages, tube):
         kelola_wilayah.process()
 
     elif class_name == "PusherTakit":
-        if not tube:
-            print("Error: TUBE is required for PusherTakit")
-            return
         pusher = PusherTakit()
-        pusher.process(tube)
+        pusher.process()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Download file using specified class.")
