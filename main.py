@@ -13,7 +13,7 @@ from src.controller.sipukat.hpl import Hpl
 from src.controller.tanah_kita.pusher import PusherTakit
 import argparse
 
-def main(class_name, url, total_pages):
+def main(class_name, url, total_pages, tube):
     logger.success(f"Start process {class_name}...")
     if class_name == "Majalah":
         downloader = Majalah(url, total_pages)
