@@ -108,5 +108,5 @@ class PusherTakit:
                     if not data_found_in_first_page:
                         continue
 
-    def process(self, tube):
-        self.get_link(tube)
+    def process(self):
+        self.get_link()
