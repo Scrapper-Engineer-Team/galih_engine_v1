@@ -43,7 +43,7 @@ class KelolaWilayah:
         container = soup.find(class_='content')
 
         if container:
-            title = container.find('strong').text if container.find('strong') else 'Unknown'
+            self.title = container.find('strong').text if container.find('strong') else 'Unknown'
             
             daatas = {
                 "link": url,
@@ -103,10 +103,13 @@ class KelolaWilayah:
                 kode_prov = success['kd_prop']
 
                 data = self.getDetailOne(url, tahun, jenis_wikera, kode_prov)
-                
+
+                file_name = f'{data["provinsi"]}_{data["kabupaten"]}_{data["kecamatan"]}_{data["desa"]}_{data["jenis_wilayah_kelola"]}_{data["tahapan"]}_{tahun}'
+                path_file = f's3://ai-pipeline-raw-data/data/data_descriptive/tanahkita/wilayah_kelola/{data["tahapan"]}/json/{file_name.replace(" ", "_").replace("/", "_")}.json'
+                StorageManager().save_json(path_file, data)
                 if data:
                     beanstalk.bury(job)
-                    logger.success(f"Success: {data['title']}")
+                    logger.success(f"Success: {file_name}")
                     logger.info(data)
                 else:
                     beanstalk.bury(job)
