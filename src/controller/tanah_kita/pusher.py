@@ -42,7 +42,7 @@ class PusherTakit:
         }
 
     def get_link(self):
-        for provs in code_provs[21:]:
+        for provs in code_provs:
             for year in years:
                 for jewi in jenis_wikera:
                     for tahapan in tahapans:
