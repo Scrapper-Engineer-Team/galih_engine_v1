@@ -42,8 +42,8 @@ class PusherTakit:
         }
 
     def get_link(self):
-        for provs in code_provs[20:21]:
-            for year in years[16:]:
+        for provs in code_provs[21:]:
+            for year in years:
                 for jewi in jenis_wikera:
                     for tahapan in tahapans:
                         # Variabel untuk mengecek apakah data ditemukan di halaman pertama
