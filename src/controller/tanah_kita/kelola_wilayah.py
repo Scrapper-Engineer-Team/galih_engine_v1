@@ -108,7 +108,7 @@ class KelolaWilayah:
                 path_file = f's3://ai-pipeline-raw-data/data/data_descriptive/tanahkita/wilayah_kelola/{data["tahapan"]}/json/{file_name.replace(" ", "_").replace("/", "_")}.json'
                 StorageManager().save_json(path_file, data)
                 if data:
-                    beanstalk.bury(job)
+                    beanstalk.delete(job)
                     logger.success(f"Success: {file_name}")
                     logger.info(data)
                 else:
