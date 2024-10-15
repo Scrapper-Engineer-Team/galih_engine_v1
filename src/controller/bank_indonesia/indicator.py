@@ -55,12 +55,11 @@ class Indicator:
         return description_text
     
     def get_data(self):
-        data_list = []
-
         # Find all the boxes
         boxes = self.get_html().find_all('div', class_='box-list')
+        urls = self.get_html().find_all('a', class_='box-list__hyperlink')
 
-        for box in boxes:
+        for box, url in zip(boxes, urls):
             # Safeguard to check if 'p' and 'h2' exist
             title_tag = box.find('p')
             value_tag = box.find('h2')
@@ -69,47 +68,20 @@ class Indicator:
             title = title_tag.get_text(strip=True) if title_tag else 'N/A'
             value = value_tag.get_text(strip=True) if value_tag else 'N/A'
             date = date_tag[1].get_text(strip=True) if len(date_tag) > 1 else 'N/A'
+            
 
             # Filter out entries where value is 'N/A'
             if value != 'N/A':
-                data_list.append({
+                data_list ={
                     'title': title,
                     'value': value,
-                    'date': date
-                })
+                    'date': date,
+                    'url': f"https://www.bi.go.id/{url.get('href')}"
+                }
+                yield data_list
 
-        return data_list
     
     def process(self):
-        file_name = f'{self.get_title().replace(" ", "_").replace("/", "_")}.json'
-        json_path = f's3://ai-pipeline-raw-data/data/data_statistics/Bank Indonesia/Indikator/json/{file_name}'
-        metadata = {
-            "link": "https://www.bi.go.id/id/statistik/indikator/Default.aspx",
-            "tags": [
-                "bank_indonesia",
-                "bi",
-                "indicator"
-            ],
-            "source": "bi.go.id",
-            "title": self.get_title(),
-            "sub_title": "",
-            "range_data": "",
-            "create_date": "",
-            "update_date": "",
-            "desc": self.get_description(),
-            "category": "Indicator",
-            "sub_category": "",
-            "data": self.get_data(),
-            "path_data_raw": [
-                json_path
-            ],
-            "crawling_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "crawling_time_epoch": int(time.time()),
-            "table_name": "",
-            "country_name": "Indonesia",
-            "level": "Nasional",
-            "stage": "Crawling data",
-            "update_schedule": "monthly"
-        }
-
-        print(metadata)
+        for data in self.get_data():
+            print(data)
+            yield data
