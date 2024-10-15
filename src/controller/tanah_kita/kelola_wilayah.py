@@ -24,7 +24,7 @@ class KelolaWilayah:
             text = re.sub(r'[^\x20-\x7E]', '', text)  # Menghapus karakter non-printable
         return text
 
-    def getDetailOne(self, url, tahun, jenis_wikera, kode_prov, profile):
+    def getDetailOne(self, url, tahun, jenis_wikera, kode_prov, profile, tahapnya):
         url = url.replace('index/data/wilayah_kelola/', '')
         response = self.session.get(url, headers=self.headers, timeout=30)
         
@@ -64,15 +64,16 @@ class KelolaWilayah:
         cleaned_data['latitude'] = latitude
         cleaned_data['longitude'] = longitude
         cleaned_data['profile'] = profile
+        tahapan = tahapnya
 
         file_name = f"{cleaned_data.get('provinsi', None)}_{cleaned_data.get('kabupaten', None)}_{cleaned_data.get('kecamatan', None)}_{cleaned_data.get('desa', None)}_{cleaned_data.get('jenis_wilayah_kelola', None)}_{cleaned_data.get('tahapan', None)}_{tahun}"
-        path_file = f's3://ai-pipeline-raw-data/data/data_descriptive/tanahkita/wilayah_kelola/{cleaned_data["tahapan"].replace(" ", "_").lower()}/json/{file_name.replace(" ", "_").replace("/", "_").lower()}.json'
+        path_file = f's3://ai-pipeline-raw-data/data/data_descriptive/tanahkita/wilayah_kelola/{tahapan.replace(" ", "_").lower()}/json/{file_name.replace(" ", "_").replace("/", "_").lower()}.json'
         metadata = {
             "link": url,
             "tags": [
                 "tanah_kita",
                 "wilayah_kelola",
-                f'{cleaned_data["tahapan"].replace(" ", "_").lower()}'
+                f'{tahapan.replace(" ", "_").lower()}'
             ],
             "source": "tanahkita.id",
             "title": "Data Wilayah Kelola",
@@ -113,8 +114,9 @@ class KelolaWilayah:
                 jenis_wikera = success['jenis_wikera']
                 kode_prov = success['kd_prop']
                 profile = success['profile']
+                tahapnya = success['tahap']
 
-                data = self.getDetailOne(url, tahun, jenis_wikera, kode_prov, profile)
+                data = self.getDetailOne(url, tahun, jenis_wikera, kode_prov, profile, tahapnya)
 
                 if data:
                     beanstalk.delete(job)
