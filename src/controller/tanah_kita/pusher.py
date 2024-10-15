@@ -4,23 +4,17 @@ from bs4 import BeautifulSoup
 from loguru import logger
 import requests
 import greenstalk
-import concurrent.futures
 
 code_provs = [
-    12, 13, 14, 15, 16, 18, 33, 
-    35,
-      36, 17, 32, 51, 52, 53, 61, 62, 63, 64, 65, 71, 72, 73, 74, 34, 21, 19, 75, 76, 82, 11, 81, 31, 91, 95, 93, 94, 96, 92
+    12, 13, 14, 15, 16, 18, 33,
+    35, 36, 17, 32, 51, 52, 53, 61, 62, 63, 64, 65, 71, 72, 73, 74, 34, 21, 19, 75, 76, 82, 11, 81, 31, 91, 95, 93, 94, 96, 92
 ]
-# years = [
-#     # '1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', 
-#     # '2021', 
-#     # '2022', '2023',
-#      '2024'
-# ]
+
 jenis_wikera = [
     "TORA",
-      "PIAPS", "HA", "PPPBM"
+    "PIAPS", "HA", "PPPBM"
 ]
+
 tahapans = [
     "T1", 
     "T2", "T3", "T4", "T5", "T6", "T7", "T8"
@@ -51,14 +45,12 @@ class PusherTakit:
 
     def clean_text(self, text):
         if isinstance(text, str):
-            # Menghapus karakter whitespace ekstra dan menghilangkan karakter non-printable
-            text = re.sub(r'\s+', ' ', text)  # Mengganti beberapa spasi dengan satu spasi
-            text = text.strip()  # Menghapus spasi di awal dan akhir
-            text = re.sub(r'[^\x20-\x7E]', '', text)  # Menghapus karakter non-printable
+            text = re.sub(r'\s+', ' ', text)
+            text = text.strip()
+            text = re.sub(r'[^\x20-\x7E]', '', text)
         return text
 
     def fetch_links(self, provs, jewi, tahapan):
-        data_found = False
         for i in range(0, 201, 10):
             params = {
                 'tipe': '1',
@@ -84,7 +76,6 @@ class PusherTakit:
                 tahaps = soup.select('tr td:nth-child(6)')
 
                 if links:
-                    data_found = True
                     for link, prof, year, tahapnya in zip(links, profs, years, tahaps):
                         href = link.get('href')
                         profile = prof.text.strip()
@@ -102,8 +93,7 @@ class PusherTakit:
                             client = greenstalk.Client(('192.168.99.69', 11300), use='sc-tanah-kita-baselink')
                             client.put(json.dumps(base_meta), ttr=3600)
                 else:
-                    # If no links found, we've reached the end of the data
-                    break
+                    break  # Stop fetching if no links found
 
             except requests.HTTPError as http_err:
                 logger.error(f"HTTP error occurred: {http_err} for URL: {url}")
@@ -112,21 +102,11 @@ class PusherTakit:
                 logger.error(f"Other error occurred: {err} for URL: {url}")
                 break
 
-        return data_found
-
     def get_link(self):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
-            futures = []
-            for provs in code_provs:
-                # for year in years:
-                for jewi in jenis_wikera:
-                    for tahapan in tahapans:
-                        futures.append(executor.submit(self.fetch_links, provs, jewi, tahapan))
-
-            # Wait for all futures to complete and check for data found
-            for future in concurrent.futures.as_completed(futures):
-                if not future.result():
-                    logger.info("Continuing to the next tahapan or province.")
+        for provs in code_provs:
+            for jewi in jenis_wikera:
+                for tahapan in tahapans:
+                    self.fetch_links(provs, jewi, tahapan)
 
     def process(self):
         self.get_link()
