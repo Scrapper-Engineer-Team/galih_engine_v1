@@ -99,7 +99,7 @@ class PusherTakit:
                                 'url': full_link,
                                 'tahap': tahapnya.text.strip()
                             }
-                            client = greenstalk.Client(('192.168.99.69', 11300), use='sc-tanah-kita-baselink')
+                            client = greenstalk.Client(('192.168.20.175', 11300), use='sc-tanah-kita-baselink')
                             client.put(json.dumps(base_meta), ttr=3600)
                 else:
                     # If no links found, we've reached the end of the data

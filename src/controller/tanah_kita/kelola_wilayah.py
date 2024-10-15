@@ -102,7 +102,7 @@ class KelolaWilayah:
         return True
 
     def process(self):
-        beanstalk = greenstalk.Client(('192.168.99.69', 11300), watch='sc-tanah-kita-baselink')
+        beanstalk = greenstalk.Client(('192.168.20.175', 11300), watch='sc-tanah-kita-baselink')
         
         while True:
             job = beanstalk.reserve()
