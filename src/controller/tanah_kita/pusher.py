@@ -115,7 +115,7 @@ class PusherTakit:
         return data_found
 
     def get_link(self):
-        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
             futures = []
             for provs in code_provs:
                 # for year in years:
