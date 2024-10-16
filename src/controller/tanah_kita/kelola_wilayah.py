@@ -66,7 +66,7 @@ class KelolaWilayah:
         cleaned_data['profile'] = profile
         tahapan = tahapnya
 
-        file_name = f"{cleaned_data.get('provinsi', None)}_{cleaned_data.get('kabupaten', None)}_{cleaned_data.get('kecamatan', None)}_{cleaned_data.get('desa', None)}_{cleaned_data.get('jenis_wilayah_kelola', None)}_{cleaned_data.get('tahapan', None)}_{latitude.replace('.','')}{longitude.replace('.','')}_{tahun}"
+        file_name = f"{cleaned_data.get('provinsi', None)}_{cleaned_data.get('kabupaten', None)}_{cleaned_data.get('kecamatan', None)}_{cleaned_data.get('desa', None)}_{cleaned_data.get('jenis_wilayah_kelola', None)}_{cleaned_data.get('tahapan', None)}_{cleaned_data.get('url').split('/')[-1].lower()}_{tahun}"
         path_file = f's3://ai-pipeline-raw-data/data/data_descriptive/tanahkita/wilayah_kelola/test/{tahapan.replace(" ", "_").lower()}/json/{file_name.replace(" ", "_").replace("/", "_").lower()}.json'
         metadata = {
             "link": url,

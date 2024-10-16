@@ -12,6 +12,7 @@ from src.controller.tanah_kita.kelola_wilayah import KelolaWilayah
 from src.controller.sipukat.hpl import Hpl
 from src.controller.tanah_kita.pusher import PusherTakit
 from src.controller.bank_indonesia.indicator import Indicator
+from src.controller.bank_indonesia.download_excel import BIDownload
 import argparse
 
 def main(class_name, url, total_pages, tube):
@@ -89,6 +90,25 @@ def main(class_name, url, total_pages, tube):
     elif class_name == "Indicator":
         indicator = Indicator()
         indicator.process()
+
+    elif class_name == "BIDownload":
+        indicator = Indicator()
+        bi_download = BIDownload()
+
+        for data in indicator.get_data():  # Iterasi setiap data yang di-yield
+            if 'url' in data:
+                download_url = data['url']
+                title = data['title']
+                value = data['value']
+                date = data['date']
+                logger.info(f"Downloading from: {download_url}")
+                try:
+                    bi_download.process(download_url, title, value, date)  # Proses download satu per satu
+                except Exception as e:
+                    logger.error(f"Failed to download from {download_url}: {e}")
+    
+    else:
+        logger.error(f"Class {class_name} not found.")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Download file using specified class.")
